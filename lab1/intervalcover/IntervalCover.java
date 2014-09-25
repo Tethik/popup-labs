@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 
-public class InternalCover {
+public class IntervalCover {
 	
 	public static class Interval implements Comparable<Interval>, Comparator<Interval> {		
 		public double left;
@@ -27,7 +27,6 @@ public class InternalCover {
 		@Override
 		public int compare(Interval o1, Interval o2) {
 			int cmp = o1.compareTo(o2);
-//			System.out.println(o1 + " " + o2 + " = " + cmp);
 			return cmp;
 		}		
 		
@@ -68,16 +67,11 @@ public class InternalCover {
 			return new Interval[] {};
 		
 		Arrays.sort(intervals);
-//		for(Interval i : intervals)
-//			System.out.println(i.left + " " + i.right);
-//		System.out.println();
 		
 		ArrayList<Interval> answer = new ArrayList<>();
 		
 		double L = goal.left;
 		double R = goal.right;
-		
-		assert(L <= R);
 		
 		int besti = 0;
 		
@@ -87,7 +81,7 @@ public class InternalCover {
 //			System.out.println("Binary search for: " + L + " returns " + end);
 			boolean set = false;
 			for(int i = besti; i < end && i < intervals.length; i++) {				
-				if(intervals[i].right > intervals[besti].right && intervals[i].left <= L || !set) {
+				if(intervals[i].left <= L && (intervals[i].right > intervals[besti].right || answer.size() == 0)) {
 					set = true;
 					besti = i;
 				}
@@ -95,7 +89,7 @@ public class InternalCover {
 			
 //			System.out.println(intervals[besti]);
 			
-			if(!set || (intervals[besti].right <= L && intervals[besti].right < R) || intervals[besti].left > L)
+			if(!set)
 				return new Interval[] {};
 			
 			answer.add(intervals[besti]);
