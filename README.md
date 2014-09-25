@@ -3,9 +3,10 @@ popup-labs
 
 Different algorithms implmeneted as part of Lab assignments for the POPUPH14 course at KTH
 
-- Intervalltäckning: Uddholm
+- Intervalltäckning: Joakim
 - Kappsäck: Per
-- Längsta ökande delsekvens: 
-- Disjunkta mängder / ekvivalensrelation: 
-- Prefixsummor:
+- Längsta ökande delsekvens: Joakim
+- Disjunkta mängder / ekvivalensrelation: Joakim
+- Prefixsummor: Per
 - Polynom-multiplikation: 
+- Linjära Ekvationssystem:
