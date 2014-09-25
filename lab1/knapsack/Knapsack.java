@@ -1,6 +1,13 @@
 import java.util.ArrayList;
 
 public class Knapsack {
+	/**
+	 * 
+	 * @param capacity
+	 * @param values
+	 * @param weights
+	 * @return
+	 */
 	public int[] solve(Double capacity, int[] values, int[] weights) {
 		int maxItems = values.length;
 		int maxWeight = capacity.intValue();
@@ -68,6 +75,7 @@ public class Knapsack {
 			
 			System.out.println(sb.toString().trim());
 		} while (kattio.hasMoreTokens());
-
+		
+		kattio.close();
 	}
 }
