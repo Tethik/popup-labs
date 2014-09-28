@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
+/**
+ * Solves the Longest Incremenet Subsequence problem for any list of comparables.
+ * @author Joakim Uddholm, Per Classon
+ */
 public class LongestIncSubseq {
 	
 	private static class IndexedItem<T extends Comparable<T>> implements Comparable<IndexedItem<T>> {
@@ -39,6 +42,11 @@ public class LongestIncSubseq {
 		return builder.toString();
 	}
 	
+	/**
+	 * Given a list of objects return an index-list representing the longest incrementing subsequence.
+	 * @param objects
+	 * @return
+	 */
 	public static<T extends Comparable<T>> Integer[] solve(T objects[]) {
 		if(objects.length == 0)
 			return new Integer[] {};
