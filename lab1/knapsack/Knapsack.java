@@ -1,12 +1,15 @@
+/**
+ * Author: Per Classon (pclasson@kth.se), Joakimg Uddholm (juddholm@kth.se)
+ */
 import java.util.ArrayList;
 
 public class Knapsack {
 	/**
-	 * 
-	 * @param capacity
-	 * @param values
-	 * @param weights
-	 * @return
+	 * Solves the knapsack problem when the weights are integers.
+	 * @param capacity The capacity for our knapsack.
+	 * @param values The value for each element i in the array.
+	 * @param weights The weight for each element i in the array.
+	 * @return An array of the elements i chosen for our knapsack.
 	 */
 	public int[] solve(Double capacity, int[] values, int[] weights) {
 		int maxItems = values.length;
