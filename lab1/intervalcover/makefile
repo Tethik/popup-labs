@@ -1,16 +1,16 @@
-all: internalcover.o test internalcover
+all: intervalcover.o test intervalcover
 
 clean:
 	rm *.o *.out testrunner.cpp
 
-internalcover.o: internalcover.h internalcover.cpp
-	g++ -std=c++11 -g -Wall internalcover.cpp -c -o internalcover.o
+intervalcover.o: intervalcover.hpp intervalcover.cpp
+	g++ -std=c++11 -g -Wall intervalcover.cpp -c -o intervalcover.o
 
 testrunner:
 	cxxtestgen --error-printer -o testrunner.cpp *.cxxtest.cpp
 
-test: internalcover.o testrunner 
-	g++ -std=c++11 -o test.out testrunner.cpp internalcover.o
+test: intervalcover.o testrunner 
+	g++ -std=c++11 -o test.out testrunner.cpp intervalcover.o
 	
-internalcover: internalcover.o
-	g++ -std=c++11 -g -Wall intervalcover.main.cpp -o intervalcover internalcover.o
+intervalcover: intervalcover.o
+	g++ -std=c++11 -g -Wall intervalcover.main.cpp -o intervalcover intervalcover.o

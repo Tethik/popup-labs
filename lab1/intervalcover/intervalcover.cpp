@@ -1,4 +1,4 @@
-#include "internalcover.h"
+#include "intervalcover.hpp"
 
 #include <algorithm>
 #include <iostream>

@@ -1,6 +1,6 @@
 #include <cxxtest/TestSuite.h>
 
-#include "internalcover.h"
+#include "intervalcover.hpp"
 #include <vector>
 
 using namespace std;
