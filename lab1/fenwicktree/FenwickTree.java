@@ -1,10 +1,18 @@
+/**
+ * @author Per Classon pclasson@kth.se, Joakim Uddholm juddholm@kth.se
+ */
 public class FenwickTree {
 	private long[] fenwickTree;
 
 	public FenwickTree(int arrayLength) {
 		fenwickTree = new long[arrayLength + 1];
 	}
-
+	
+	/**
+	 * Updates element i in the prefix sum.
+	 * @param i The element to update.
+	 * @param delta The change of value.
+	 */
 	public void update(int i, long delta) {
 		int inx = i + 1;
 		assert inx < (fenwickTree.length - 1);
@@ -15,6 +23,11 @@ public class FenwickTree {
 		}
 	}
 
+	/**
+	 * Gets the sum of elements 0 to i in our prefix sum.
+	 * @param i The upper limit index.
+	 * @return The sum.
+	 */
 	public long query(int i) {
 		assert i >= 0;
 		assert i <= fenwickTree.length;
