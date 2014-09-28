@@ -4,11 +4,21 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
+/**
+ * Solves the Union-Find problem for disjuntive sets.
+ * @author Joakim Uddholm, Per Classon
+ *
+ */
 public class UnionFind {
 	
 	int[] ranks;
 	int[] tree;
 	
+	/***
+	 * Instansiates a Union-Find scenario with a set amount of sets. Initially they are all sets which contain only the
+	 * index.
+	 * @param size
+	 */
 	public UnionFind(int size) {
 		if(size < 0)
 			throw new IllegalArgumentException("Size must be greater than 0.");
@@ -21,14 +31,23 @@ public class UnionFind {
 		}
 	}
 	
-	private int Find(int a) {
+	/**
+	 * Returns int representing the set which contains a.
+	 * @param a
+	 * @return
+	 */
+	public int Find(int a) {
 		int parent = tree[a];
 		if(parent != a)
 			tree[a] = Find(parent);
 		return tree[a];
-	}
+	}	
 	
-	
+	/**
+	 * Unions the set containing a with the set containing b.
+	 * @param a
+	 * @param b
+	 */
 	public void Union(int a, int b) {		
 		int aRoot = Find(a);
 		int bRoot = Find(b);
@@ -49,7 +68,12 @@ public class UnionFind {
 		}
 	}
 	
-	
+	/**
+	 * Checks if a is in the same set as b.
+	 * @param a
+	 * @param b
+	 * @return
+	 */
 	public boolean Same(int a, int b) {
 		return Find(a) == Find(b);						
 	}	
