@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
-/*
+/**
  * Authors: Per Classon, Joakim Uddholm
  */
-public class Graph {
-	private List<Vertex>[] adj;
-	private int v;
+public class AdjacencyListGraph implements Graph {
+	protected List<Edge>[] adj;
+	protected int v;
 
 	/**
 	 * The constructor for our graph.
@@ -17,7 +17,7 @@ public class Graph {
 	 *            The number of edges in the graph
 	 */
 	@SuppressWarnings("unchecked")
-	public Graph(int v) {
+	public AdjacencyListGraph(int v) {
 		this.v = v;
 		adj = new List[v];
 		for (int i = 0; i < v; i++) {
@@ -35,15 +35,24 @@ public class Graph {
 	 * @param w
 	 *            Weight of weight.
 	 */
-	public void addEdge(int n, int m, int w) {
-		adj[n].add(new Vertex(m, w));
+	public void addEdge(Edge edge) {
+		adj[edge.x].add(edge);
 	}
 
-	public List<Vertex> getNeighbours(int n) {
+	public Iterable<Edge> getEdgesFrom(int n) {
 		return adj[n];
 	}
+	
+//	public Iterable<Vertex> getNeighbours(int n) {
+//		return adj[n];
+//	}
 
 	public int getV() {
 		return v;
+	}
+
+	@Override
+	public boolean isNeighbour(int u, int v) {
+		return adj[u].contains(v);
 	}
 }

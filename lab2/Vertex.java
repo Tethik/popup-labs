@@ -1,8 +1,7 @@
-/*
+/**
  * Authors: Per Classon, Joakim Uddholm
  */
 public class Vertex implements Comparable<Vertex> {
-	public long dist;
 	public int index, weight;
 	public Vertex prev;
 
@@ -13,6 +12,6 @@ public class Vertex implements Comparable<Vertex> {
 
 	@Override
 	public int compareTo(Vertex o) {
-		return Long.compare(dist, o.dist);
+		return Integer.compare(weight, o.weight);
 	}
 }

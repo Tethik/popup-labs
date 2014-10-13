@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/*
+/**
  * Authors: Per Classon, Joakim Uddholm
  */
 public class Path {
