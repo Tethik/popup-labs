@@ -20,8 +20,8 @@ public class Edge implements Comparable<Edge> {
 		this.x = x;
 		this.y = y;		
 		this.weight = d;
-		this.t0 = t0;
 		this.p = p;
+		this.t0 = t0;
 	}
 	
 	public int x;
@@ -58,5 +58,9 @@ public class Edge implements Comparable<Edge> {
 	@Override
 	public int compareTo(Edge o) {
 		return Integer.compare(weight, o.weight);
+	}
+
+	public long getWeight(long w) {
+		return w + weight;
 	}
 }

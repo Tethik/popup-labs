@@ -66,17 +66,17 @@ public class ShortestPath {
 	public static Path dijkstra(AdjacencyListGraph g, int source) {
 		int length = g.getV();
 		
-		final long[] dist = new long[length];		
-		PriorityQueue<Integer> q = new PriorityQueue<Integer>(length, new DistanceComparator(dist));
+		final long[] weight = new long[length];		
+		PriorityQueue<Integer> q = new PriorityQueue<Integer>(length, new DistanceComparator(weight));
 		
 		int[] prev = new int[length];
 		HashSet<Integer> visited = new HashSet<>();
 		
 		for(int i = 0; i < length; ++i) {
-			dist[i] = Long.MAX_VALUE;
+			weight[i] = Long.MAX_VALUE;
 			prev[i] = -1;
 		}
-		dist[source] = 0;
+		weight[source] = 0;
 		prev[source] = source;
 		q.add(source);
 		
@@ -86,12 +86,16 @@ public class ShortestPath {
 				
 			visited.add(node);
 			for (Edge e : g.getEdgesFrom(node)) {
-				if(visited.contains(e.y))
+				if (visited.contains(e.y))
 					continue;	
 				
-				long alt = dist[node] + e.weight;
-				if (alt < dist[e.y]) {
-					dist[e.y] = alt;
+				long alt = e.getWeight(weight[node]);
+
+				if (alt < 0)
+					continue;
+				
+				if (alt < weight[e.y]) {
+					weight[e.y] = alt;
 					prev[e.y] = node;
 					q.remove(e.y);
 					q.add(e.y);
@@ -100,6 +104,6 @@ public class ShortestPath {
 			}
 		}
 		
-		return new Path(dist, prev, source);
+		return new Path(weight, prev, source);
 	}
 }
