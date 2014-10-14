@@ -95,9 +95,11 @@ public class ShortestPath2 {
 				if (e.t0 > t) {
 					newTime = e.t0;
 				}
+				else if (e.p == 0 || ((t - e.t0) % e.p) == 0) {
+					newTime = t;
+				}
 				else {
-					long delta = t - e.t0;
-					newTime = t + (e.p - delta % e.p);
+					newTime = t + e.p - ((t - e.t0) % e.p);
 				}
 					
 				long alt = newTime + e.weight;
