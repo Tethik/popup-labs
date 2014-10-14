@@ -16,9 +16,19 @@ public class Edge implements Comparable<Edge> {
 		this.weight = weight;
 	}
 	
+	public Edge(int x, int y, int t0, int p, int d) {
+		this.x = x;
+		this.y = y;		
+		this.weight = d;
+		this.t0 = t0;
+		this.p = p;
+	}
+	
 	public int x;
 	public int y;
 	public int weight;
+	public int t0;
+	public int p;
 	
 	@Override
 	public boolean equals(Object obj) {
