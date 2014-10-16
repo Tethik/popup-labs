@@ -1,15 +1,16 @@
 /**
  * @author Joakim Uddholm, Per Classon 
  */
-public class UndirectedGraph extends AdjacencyListGraph {
+public class UndirectedGraph<T extends Edge> extends AdjacencyListGraph<T> {
 
 	public UndirectedGraph(int v) {
 		super(v);
 	}
 	
 	@Override	
-	public void addEdge(Edge edge) {	
+	public void addEdge(T edge) {			
 		adj[edge.x].add(edge);
-		adj[edge.y].add(edge.flipped());
+		T flipped = (T) edge.flipped();
+		adj[edge.y].add(flipped);
 	}
 }

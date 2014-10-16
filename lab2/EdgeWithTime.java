@@ -4,11 +4,19 @@
  * By default it will compare against other edges by time.
  * @author Joakim Uddholm, Per Classon
  */
-public class EdgeWithTime extends Edge {
-	public EdgeWithTime(int x, int y, int t0, int p, int d) {
-		super(x, y, t0, p, d);
-	}
+public class EdgeWithTime extends EdgeWithWeight {
 	
+	public int weight;
+	public int t0;
+	public int p;
+	
+	public EdgeWithTime(int x, int y, int t0, int p, int d) {
+		super(x, y, d);
+		this.t0 = t0;
+		this.p = p;
+//		this.weight = d;
+	}
+		
 	@Override
 	public long getWeight(long t) {
 		long newTime = 0;

@@ -24,7 +24,7 @@ public class MinSpanTree {
 	 * Returns null if no such tree exists (e.g. if the graph's components are not connected).
 	 * @return
 	 */
-	public static Edge[] solve(UndirectedGraph graph) {
+	public static EdgeWithWeight[] solve(UndirectedGraph<EdgeWithWeight> graph) {
 		int number_of_nodes = graph.getV();
 		final int[] key = new int[number_of_nodes];
 		boolean[] visited = new boolean[number_of_nodes];
@@ -42,7 +42,7 @@ public class MinSpanTree {
 			
 			visited[u] = true;
 			
-			for(Edge e : graph.getEdgesFrom(u)) {				
+			for(EdgeWithWeight e : graph.getEdgesFrom(u)) {				
 				if(visited[e.y])
 					continue;
 				
@@ -57,7 +57,7 @@ public class MinSpanTree {
 			}
 		}
 		
-		Edge[] solution = new Edge[number_of_nodes-1];
+		EdgeWithWeight[] solution = new EdgeWithWeight[number_of_nodes-1];
 		for(int i = 1; i < number_of_nodes; ++i) {
 			if(pred[i] < 0)
 				return null;
@@ -71,7 +71,7 @@ public class MinSpanTree {
 				x = pred[i];
 				y = i;
 			}
-			solution[i-1] = new Edge(x, y, key[i]);
+			solution[i-1] = new EdgeWithWeight(x, y, key[i]);
 		}
 		
 		Arrays.sort(solution, new EdgeComparator());
@@ -94,13 +94,13 @@ public class MinSpanTree {
 				return;
 			}
 			
-			UndirectedGraph graph = new UndirectedGraph(nodes);
+			UndirectedGraph<EdgeWithWeight> graph = new UndirectedGraph<EdgeWithWeight>(nodes);
 			for(int i = 0; i < edges; ++i) {
-				Edge e = new Edge(io.getInt(), io.getInt(), io.getInt());
+				EdgeWithWeight e = new EdgeWithWeight(io.getInt(), io.getInt(), io.getInt());
 				graph.addEdge(e);
 			}
 			
-			Edge[] sol = MinSpanTree.solve(graph);
+			EdgeWithWeight[] sol = MinSpanTree.solve(graph);
 			
 			if(sol == null) {
 				io.write("Impossible\n");
@@ -108,7 +108,7 @@ public class MinSpanTree {
 			}
 			
 			int cost = 0;
-			for(Edge e : sol) {
+			for(EdgeWithWeight e : sol) {
 				cost += e.weight;
 			}
 			io.write(Integer.toString(cost));

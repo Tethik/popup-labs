@@ -4,31 +4,15 @@
  * By default it will compare against other edges by weight.
  * @author Joakim Uddholm, Per Classon
  */
-public class Edge implements Comparable<Edge> {
+public class Edge {
+	
+	public int x;
+	public int y;
+	
 	public Edge(int x, int y) {
 		this.x = x;
 		this.y = y;		
 	}
-	
-	public Edge(int x, int y, int weight) {
-		this.x = x;
-		this.y = y;		
-		this.weight = weight;
-	}
-	
-	public Edge(int x, int y, int t0, int p, int d) {
-		this.x = x;
-		this.y = y;		
-		this.weight = d;
-		this.p = p;
-		this.t0 = t0;
-	}
-	
-	public int x;
-	public int y;
-	public int weight;
-	public int t0;
-	public int p;
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -37,12 +21,12 @@ public class Edge implements Comparable<Edge> {
 		}
 			
 		Edge o = (Edge) obj;
-		return o.x == x && o.y == y && o.weight == weight;
+		return o.x == x && o.y == y; // && o.weight == weight;
 	}
 	
 	@Override
 	public String toString() {
-		return "("+x+", "+y+", "+weight+")";
+		return "("+x+", "+y+")";
 	};
 	
 	/**
@@ -51,16 +35,7 @@ public class Edge implements Comparable<Edge> {
 	 * @return
 	 */
 	public Edge flipped() {
-		Edge e = new Edge(y, x, weight);
+		Edge e = new Edge(y, x);
 		return e;			
-	}
-
-	@Override
-	public int compareTo(Edge o) {
-		return Integer.compare(weight, o.weight);
-	}
-
-	public long getWeight(long w) {
-		return w + weight;
 	}
 }

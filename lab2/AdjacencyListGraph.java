@@ -4,8 +4,8 @@ import java.util.List;
 /**
  * Authors: Per Classon, Joakim Uddholm
  */
-public class AdjacencyListGraph implements Graph {
-	protected List<Edge>[] adj;
+public class AdjacencyListGraph<T extends Edge> implements Graph<T>  {
+	protected List<T>[] adj;
 	protected int v;
 
 	/**
@@ -35,11 +35,12 @@ public class AdjacencyListGraph implements Graph {
 	 * @param w
 	 *            Weight of weight.
 	 */
-	public void addEdge(Edge edge) {
+	@Override
+	public void addEdge(T edge) {
 		adj[edge.x].add(edge);
 	}
 
-	public Iterable<Edge> getEdgesFrom(int n) {
+	public Iterable<T> getEdgesFrom(int n) {
 		return adj[n];
 	}
 	
@@ -54,5 +55,21 @@ public class AdjacencyListGraph implements Graph {
 	@Override
 	public boolean isNeighbour(int u, int v) {
 		return adj[u].contains(v);
+	}
+	
+	@Override	
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		for(int i = 0; i < v; ++i) {
+			builder.append(i).append(": \n");
+			if(adj[i].size() == 0)
+				builder.append("None");
+			
+			for(T e : adj[i])				
+				builder.append(e).append("\n");
+			builder.append("\n");
+		}
+		
+		return builder.toString();
 	}
 }

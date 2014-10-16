@@ -1,10 +1,10 @@
 /**
  * @author Joakim Uddholm, Per Classon
  */
-public interface Graph {
+public interface Graph <T extends Edge>  {
 
-	public void addEdge(Edge edge);	
-	public Iterable<Edge> getEdgesFrom(int n);
+	public void addEdge(T edge);	
+	public Iterable<T> getEdgesFrom(int n);
 	public boolean isNeighbour(int u, int v);
 	public int getV();
 

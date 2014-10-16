@@ -15,7 +15,7 @@ public class ShortestPath2 extends ShortestPath {
 			if (v == 0 && e == 0 && q == 0 && s == 0)
 				break;
 
-			AdjacencyListGraph g = new AdjacencyListGraph(v);
+			AdjacencyListGraph<EdgeWithWeight> g = new AdjacencyListGraph<>(v);
 
 			for (int i = 0; i < e; ++i)
 				g.addEdge(new EdgeWithTime(kattio.getInt(), kattio.getInt(), kattio.getInt(), kattio.getInt(), kattio.getInt()));

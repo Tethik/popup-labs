@@ -17,7 +17,7 @@ public class Path {
 	}
 
 	/**
-	 * Get shorest distance to node. 
+	 * Get shortest distance to node. 
 	 * @param to The node.
 	 * @return The distance (long)
 	 */

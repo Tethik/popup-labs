@@ -14,10 +14,10 @@ public class ShortestPath3 {
 			if (v == 0 && e == 0 && q == 0 && s == 0)
 				break;
 
-			AdjacencyListGraph g = new AdjacencyListGraph(v);
+			AdjacencyListGraph<EdgeWithWeight> g = new AdjacencyListGraph(v);
 
 			for (int i = 0; i < e; ++i)
-				g.addEdge(new Edge(kattio.getInt(), kattio.getInt(), kattio
+				g.addEdge(new EdgeWithWeight(kattio.getInt(), kattio.getInt(), kattio
 						.getInt()));
 
 			Path p = bellmanFords(g, s);

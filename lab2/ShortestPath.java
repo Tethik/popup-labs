@@ -19,10 +19,10 @@ public class ShortestPath {
 			if (v == 0 && e == 0 && q == 0 && s == 0)
 				break;
 
-			AdjacencyListGraph g = new AdjacencyListGraph(v);
+			AdjacencyListGraph<EdgeWithWeight> g = new AdjacencyListGraph<>(v);
 
 			for (int i = 0; i < e; ++i)
-				g.addEdge(new Edge(kattio.getInt(), kattio.getInt(), kattio.getInt()));
+				g.addEdge(new EdgeWithWeight(kattio.getInt(), kattio.getInt(), kattio.getInt()));
 
 			Path p = dijkstra(g, s);
 			
@@ -63,7 +63,7 @@ public class ShortestPath {
 	 *            Source integer.
 	 * @return Path object with both distance and path to all nodes
 	 */
-	public static Path dijkstra(AdjacencyListGraph g, int source) {
+	public static Path dijkstra(AdjacencyListGraph<EdgeWithWeight> g, int source) {
 		int length = g.getV();
 		
 		final long[] weight = new long[length];		
@@ -85,7 +85,7 @@ public class ShortestPath {
 			Integer node = q.poll();
 				
 			visited.add(node);
-			for (Edge e : g.getEdgesFrom(node)) {
+			for (EdgeWithWeight e : g.getEdgesFrom(node)) {
 				if (visited.contains(e.y))
 					continue;	
 				
