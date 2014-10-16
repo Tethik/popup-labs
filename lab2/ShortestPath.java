@@ -91,10 +91,7 @@ public class ShortestPath {
 				
 				long alt = e.getWeight(weight[node]);
 
-				if (alt < 0)
-					continue;
-				
-				if (alt < weight[e.y]) {
+				if (alt >= 0 && alt < weight[e.y]) {
 					weight[e.y] = alt;
 					prev[e.y] = node;
 					q.remove(e.y);
