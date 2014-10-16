@@ -6,7 +6,6 @@
  */
 public class EdgeWithTime extends EdgeWithWeight {
 	
-	public int weight;
 	public int t0;
 	public int p;
 	
