@@ -6,12 +6,12 @@
  */
 public class Edge {
 	
-	public int x;
-	public int y;
+	public int from;
+	public int to;
 	
-	public Edge(int x, int y) {
-		this.x = x;
-		this.y = y;		
+	public Edge(int from, int to) {
+		this.from = from;
+		this.to = to;		
 	}
 	
 	@Override
@@ -21,12 +21,12 @@ public class Edge {
 		}
 			
 		Edge o = (Edge) obj;
-		return o.x == x && o.y == y; // && o.weight == weight;
+		return o.from == from && o.to == to; // && o.weight == weight;
 	}
 	
 	@Override
 	public String toString() {
-		return "("+x+", "+y+")";
+		return "("+from+", "+to+")";
 	};
 	
 	/**
@@ -35,7 +35,7 @@ public class Edge {
 	 * @return
 	 */
 	public Edge flipped() {
-		Edge e = new Edge(y, x);
+		Edge e = new Edge(to, from);
 		return e;			
 	}
 }

@@ -59,7 +59,7 @@ public class MaxFlow {
 				EdgeWithFlow edge = path[next];
 				edge.flow += flow;
 				edge.reverse.flow -= flow;
-				next = edge.x;
+				next = edge.from;
 			}
 		}
 	}
@@ -77,14 +77,14 @@ public class MaxFlow {
 			
 			for(EdgeWithFlow edge : graph.getEdgesFrom(current)) {	
 				int residual = edge.residual();		
-				if(residual > 0 && flowMap[edge.y] == Integer.MAX_VALUE && edge.y != source) {
-					path[edge.y] = edge;	
-					flowMap[edge.y] = Math.min(residual, flowMap[edge.x]);
+				if(residual > 0 && flowMap[edge.to] == Integer.MAX_VALUE && edge.to != source) {
+					path[edge.to] = edge;	
+					flowMap[edge.to] = Math.min(residual, flowMap[edge.from]);
 					
-					if(edge.y == sink)
+					if(edge.to == sink)
 						return;
 					
-					queue.add(edge.y);
+					queue.add(edge.to);
 				}	
 			}
 		}

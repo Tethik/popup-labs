@@ -37,7 +37,7 @@ public class AdjacencyListGraph<T extends Edge> implements Graph<T>  {
 	 */
 	@Override
 	public void addEdge(T edge) {
-		adj[edge.x].add(edge);
+		adj[edge.from].add(edge);
 	}
 
 	public Iterable<T> getEdgesFrom(int n) {

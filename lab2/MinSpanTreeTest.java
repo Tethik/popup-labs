@@ -89,8 +89,8 @@ public class MinSpanTreeTest {
 				int x = i-1;
 				int w = 0;
 				EdgeWithWeight e = edges[i-1];
-				assertEquals(e.x, x);
-				assertEquals(e.y, y);
+				assertEquals(e.from, x);
+				assertEquals(e.to, y);
 				assertEquals(e.weight, w);
 			}
 			
@@ -149,8 +149,8 @@ public class MinSpanTreeTest {
 		Edge[] edges = MinSpanTree.solve(graph);
 		
 		for(int i = 1; i < edges.length; ++i) {
-			assertEquals(0, edges[i].x);
-			assertTrue(edges[i].y > edges[i-1].y);
+			assertEquals(0, edges[i].from);
+			assertTrue(edges[i].to > edges[i-1].to);
 		}
 	}
 }

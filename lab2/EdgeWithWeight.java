@@ -27,15 +27,15 @@ public class EdgeWithWeight extends Edge implements Comparable<EdgeWithWeight> {
 		}
 			
 		EdgeWithWeight o = (EdgeWithWeight) obj;
-		return o.x == x && o.y == y && o.weight == weight;
+		return o.from == from && o.to == to && o.weight == weight;
 	}
 	
 	@Override	
 	public Edge flipped() {
-		return new EdgeWithWeight(y, x, weight);
+		return new EdgeWithWeight(to, from, weight);
 	}
 
-	public long getWeight(long l) {		
+	public long getWeight(long l) {
 		return l + weight;
 	}
 	

@@ -14,11 +14,10 @@ public class EdgeWithTime extends EdgeWithWeight {
 		super(x, y, d);
 		this.t0 = t0;
 		this.p = p;
-//		this.weight = d;
 	}
 		
 	@Override
-	public long getWeight(long t) {
+	public long getWeight(long t) {		
 		long newTime = 0;
 		
 		if (p == 0 && t > t0)

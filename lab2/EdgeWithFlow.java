@@ -17,7 +17,7 @@ public class EdgeWithFlow extends Edge {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append(this.x).append(" ").append(this.y).append(" ")
+		builder.append(this.from).append(" ").append(this.to).append(" ")
 		.append(this.flow);
 		return builder.toString();
 	}

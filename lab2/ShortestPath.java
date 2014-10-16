@@ -86,16 +86,16 @@ public class ShortestPath {
 				
 			visited.add(node);
 			for (EdgeWithWeight e : g.getEdgesFrom(node)) {
-				if (visited.contains(e.y))
+				if (visited.contains(e.to))
 					continue;	
 				
 				long alt = e.getWeight(weight[node]);
 
-				if (alt >= 0 && alt < weight[e.y]) {
-					weight[e.y] = alt;
-					prev[e.y] = node;
-					q.remove(e.y);
-					q.add(e.y);
+				if (alt >= 0 && alt < weight[e.to]) {
+					weight[e.to] = alt;
+					prev[e.to] = node;
+					q.remove(e.to);
+					q.add(e.to);
 				}
 				
 			}

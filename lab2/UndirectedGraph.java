@@ -9,8 +9,8 @@ public class UndirectedGraph<T extends Edge> extends AdjacencyListGraph<T> {
 	
 	@Override	
 	public void addEdge(T edge) {			
-		adj[edge.x].add(edge);
+		adj[edge.from].add(edge);
 		T flipped = (T) edge.flipped();
-		adj[edge.y].add(flipped);
+		adj[edge.to].add(flipped);
 	}
 }

@@ -13,9 +13,9 @@ public class MinSpanTree {
 	private static class EdgeComparator implements Comparator<Edge> {
 		@Override
 		public int compare(Edge o1, Edge o2) {
-			if(o1.x == o2.x)
-				return Integer.compare(o1.y, o2.y);
-			return Integer.compare(o1.x, o2.x);
+			if(o1.from == o2.from)
+				return Integer.compare(o1.to, o2.to);
+			return Integer.compare(o1.from, o2.from);
 		}
 	}
 	
@@ -43,11 +43,11 @@ public class MinSpanTree {
 			visited[u] = true;
 			
 			for(EdgeWithWeight e : graph.getEdgesFrom(u)) {				
-				if(visited[e.y])
+				if(visited[e.to])
 					continue;
 				
 				int w = e.weight;
-				int y = e.y;
+				int y = e.to;
 				if(w < key[y]) {
 					key[y] = w;	
 					Vertex v = new Vertex(y, w);
@@ -115,9 +115,9 @@ public class MinSpanTree {
 			io.write('\n');
 			
 			for(Edge e : sol) {
-				io.write(Integer.toString(e.x));
+				io.write(Integer.toString(e.from));
 				io.write(' ');
-				io.write(Integer.toString(e.y));
+				io.write(Integer.toString(e.to));
 				io.write('\n');
 			}
 		}		
