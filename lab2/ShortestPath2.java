@@ -1,6 +1,7 @@
 
-/*
- * Authors: Per Classon, Joakim Uddholm
+
+/**
+ * @author Joakimg Uddholm, Per Classon
  */
 public class ShortestPath2 extends ShortestPath {
 	public static void main(String[] args) {

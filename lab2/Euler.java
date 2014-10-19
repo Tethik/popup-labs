@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.ListIterator;
 
 
+/**
+ * @author Joakimg Uddholm, Per Classon
+ */
 public class Euler {
 	
 	/**

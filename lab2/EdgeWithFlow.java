@@ -1,3 +1,7 @@
+
+/**
+ * @author Joakimg Uddholm, Per Classon
+ */
 public class EdgeWithFlow extends Edge {
 
 	public int flow;
