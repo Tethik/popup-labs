@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * Solves the minimum cut problem. 
+ * 
+ * Idea From: Föreläsning + http://stackoverflow.com/questions/4482986/how-can-i-find-the-minimum-cut-on-a-graph-using-a-maximum-flow-algorithm
  * @author Joakim Uddholm, Per Classon
  */
 public class MinCut extends MaxFlow {

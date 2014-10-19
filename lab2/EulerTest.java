@@ -1,6 +1,8 @@
 import static org.junit.Assert.*;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -129,6 +131,44 @@ public class EulerTest {
 		
 		List<Integer> p =  euler.path();
 		assertTrue(p.size() > 0);
+	}
+	
+	@Test
+	public void ImakeThePath() {
+		int maxnodes = 10;
+		int maxedges = maxnodes*maxnodes;
+		Random random = new Random();
+		
+		for(int j = 0; j < 1000000; ++j) {
+			int nEdges = 1 + random.nextInt(maxedges - 1);
+			
+			ArrayList<Edge> edges = new ArrayList<>();
+			Euler euler = new Euler(maxnodes);
+			int prev = random.nextInt(maxnodes);
+			for(int i = 0; i < nEdges; ++i) {
+				int next = random.nextInt(maxnodes);
+				Edge edge = new Edge(prev, next);			
+				edges.add(edge);
+				prev = next;
+			}
+			
+			Collections.shuffle(edges);
+			for(int i = 0; i < nEdges; ++i) {
+				euler.addEdge(edges.get(i).from, edges.get(i).to);
+			}
+			
+			System.out.println(edges);
+			
+			List<Integer> path = euler.path();
+			prev = path.get(0);
+			for(int i = 1; i < path.size(); ++i) {
+				int next = path.get(i);
+				assertTrue(edges.remove(new Edge(prev,next)));
+				prev = next;
+			}
+		}
+		
+		
 	}
 
 }

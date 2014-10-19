@@ -96,6 +96,7 @@ public class Euler {
 	private int numberOfNodes;
 	private int start;
 	private int end;
+	private int nonzero;
 	
 	@SuppressWarnings("unchecked")
 	public Euler(int nodes) {
@@ -124,6 +125,7 @@ public class Euler {
 		// and all of its vertices with nonzero degree belong to a single connected component of the underlying undirected graph.
 		start = -1;
 		end = -1;
+		nonzero = -1;
 		for(int i = 0; i < numberOfNodes; ++i) {
 			int sum = adjacencyLists[i].size() - in[i];
 			if(sum == 1) {
@@ -143,6 +145,10 @@ public class Euler {
 			if(Math.abs(sum) > 1) {				
 				return;
 			}
+			
+			if(nonzero == -1 && adjacencyLists[i].size() > 0)
+				nonzero = i;
+			
 		}		
 		
 		preconPassed = !((start > -1 && end == -1) || (start == -1 && end > -1));
@@ -157,7 +163,7 @@ public class Euler {
 		if(!preconPassed)
 			return empty;
 		
-		start = start > -1 ? start : 0; // E.g. for 1 -> 2, 2 -> 1
+		start = start > -1 ? start : nonzero; // E.g. for 1 -> 2, 2 -> 1
 				
 		path.add(start);
 		Node iterator = path.iterator();				
