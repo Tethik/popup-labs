@@ -9,15 +9,18 @@ import java.util.Set;
  */
 public class NegativePath {
 	long[] dist;
+	int[] pre;
 	boolean[] inf;
 	int source;
 	Graph<EdgeWithWeight> g;
 
-	public NegativePath(long[] dist, int source, boolean[] inf, Graph<EdgeWithWeight> g) {
+	public NegativePath(long[] dist, int[] pre, boolean[] inf,
+			Graph<EdgeWithWeight> g, Integer source) {
 		this.dist = dist;
 		this.source = source;
 		this.g = g;
 		this.inf = inf;
+		this.pre = pre;
 	}
 
 	/**
@@ -28,6 +31,8 @@ public class NegativePath {
 	 * @return The distance (long)
 	 */
 	public long getDistance(int to) {
+		if (containsCycle(to))
+			return Long.MIN_VALUE;
 		return dist[to];
 	}
 
@@ -41,13 +46,21 @@ public class NegativePath {
 	 */
 	public List<Integer> getPath(int to) {
 		List<Integer> path = new ArrayList<>();
-		
-		long d = dist[to];
-		
-		
-		
+
 		System.out.println("path: " + path);
 		return path;
+	}
+
+	public boolean containsCycle(int to) {
+		Set<Integer> v = new HashSet<>();
+		v.add(to);
+		while (to != source) {
+			to = pre[to];
+			if (v.contains(to))
+				return true;
+			v.add(to);
+		}
+		return false;
 	}
 
 }

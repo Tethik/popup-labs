@@ -25,6 +25,8 @@ public class ShortestPath3 {
 				long d = p.getDistance(kattio.getInt());
 				if (d == Long.MAX_VALUE) {
 					kattio.print("Impossible\n");
+				} else if (d == Long.MIN_VALUE) {
+					kattio.print("-Infinity\n");
 				} else {
 					kattio.print(Long.toString(d));
 					kattio.print('\n');
@@ -46,7 +48,7 @@ public class ShortestPath3 {
 		int length = g.getV();
 		long[] weight = new long[length];
 		boolean[] inf = new boolean[length];
-		int[] path = new int[length];
+		int[] pre = new int[length];
 		for (int i = 1; i < length; i++) {
 			weight[i] = Long.MAX_VALUE;
 		}
@@ -57,7 +59,7 @@ public class ShortestPath3 {
 				for (EdgeWithWeight e : g.getEdgesFrom(j)) {
 					if (weight[e.to] > weight[e.from] + e.weight) {
 						weight[e.to] = weight[e.from] + e.weight;
-						path[e.to] = e.from;
+						pre[e.to] = e.from;
 					}
 				}
 			}
@@ -71,6 +73,6 @@ public class ShortestPath3 {
 			}
 		}
 		
-		return new NegativePath(weight, source, inf, g);
+		return new NegativePath(weight, pre, inf, g, source);
 	}
 }
