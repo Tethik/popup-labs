@@ -10,11 +10,11 @@ import java.util.Queue;
  */
 public class MaxFlow {
 	
-	private AdjacencyListGraph<EdgeWithFlow> graph;
-	private EdgeWithFlow[] path;
-	private int[] flowMap;
-	private int totalFlow = 0;
-	private int nodes;
+	protected AdjacencyListGraph<EdgeWithFlow> graph;
+	protected EdgeWithFlow[] path;
+	protected int[] flowMap;
+	protected int totalFlow = 0;
+	protected int nodes;
 	
 	public MaxFlow(int nodes) {
 		this.nodes = nodes;
