@@ -225,7 +225,7 @@ public class Euler {
 			}
 			
 			List<Integer> path = euler.path();
-			if(path.size() == 0) {
+			if(path.size() == 0 || path.size() != m + 1) {
 				katt.append("Impossible\n");
 			} else {
 				for(int i = 0; i < path.size(); ++i) {
