@@ -118,9 +118,9 @@ public class Euler {
 		numberOfEdges++;
 	}
 	
-	private boolean preconPassed = false;
 	
-	private void precondition() {
+	
+	private boolean precondition() {
 		// Precon: (from wiki)
 		// A directed graph has an Eulerian trail if and only if at most one vertex
 		// has (out-degree) − (in-degree) = 1, at most one vertex has (in-degree) − (out-degree) = 1,
@@ -133,20 +133,20 @@ public class Euler {
 			int sum = adjacencyLists[i].size() - in[i];
 			if(sum == 1) {
 				if(start > -1)
-					return;
+					return false; 
 				
 				start = i;		
 				continue;
 			} else if(sum == -1) {
 				if(end > -1)
-					return;
+					return false;
 				
 				end = i;
 				continue;
 			}
 			
 			if(Math.abs(sum) > 1) {				
-				return;
+				return false;
 			}
 			
 			if(nonzero == -1 && adjacencyLists[i].size() > 0)
@@ -154,59 +154,56 @@ public class Euler {
 			
 		}		
 		
-		preconPassed = !((start > -1 && end == -1) || (start == -1 && end > -1));
+		return (start == -1 && end == -1) || (start > -1 && end > -1);
 	}
 	
+	/**
+	 * If possible, returns a list containing a path of nodes visited. Otherwise an empty list.
+	 * Each edge will be visited exactly once.
+	 * @return
+	 */
 	public List<Integer> path() {
 		NodeList path = new NodeList();
 		LinkedList<Integer> empty = new LinkedList<Integer>();
-		
-		precondition();
-		
-		if(!preconPassed)
+				
+		if(!precondition())
 			return empty;
 		
-		start = start > -1 ? start : nonzero; // E.g. for 1 -> 2, 2 -> 1
+		start = start > -1 ? start : nonzero; 
 				
 		path.add(start);
 		Node iterator = path.iterator();				
 		
-		while(iterator!= null) {
+		while(iterator != null) {
 			int current = iterator.value;	
 			
-//			System.out.println(current);
-//			System.out.println(path.size);
-//			System.out.println(path);
-			
-			// Find cycle for current, append to iterator...	
+			// Find cycle for current, append to iterator...
 			Node insert = iterator;
-			while(adjacencyLists[current].size() > 0) {				
-				int next = adjacencyLists[current].pollFirst();
-				insert = path.insert(insert, next);				
+			while(adjacencyLists[current].size() > 0) {
+				int next = current;
 				
-				while(adjacencyLists[next].size() > 0) {					
+				do {
 					next = adjacencyLists[next].pollFirst();					
-					insert = path.insert(insert, next);						
-				}
+					insert = path.insert(insert, next);
+				} while(next != current && adjacencyLists[next].size() > 0);
 				
-				if(next != current) {
+				if(next != current // found the end
+						&& adjacencyLists[current].size() > 0) // but there are still edges from this node..
 					insert = iterator;
-				}	
-				
-//				System.out.println(insert.value);
-//				System.out.println(path.size);
-//				System.out.println(path);
 			}	
 			
+			// All cycles handled, continue.
 			iterator = iterator.next;
 		}
 		
-		if(path.size < numberOfEdges)
+		if(path.size <= numberOfEdges) // composites..
 			return empty;
 		
 		List<Integer> ret = new ArrayList<Integer>(path.size);
+			
 		for(int v : path.toList())
 			ret.add(v);
+		
 		return ret;
 	}
 
@@ -228,7 +225,7 @@ public class Euler {
 			}
 			
 			List<Integer> path = euler.path();
-			if(path.size() == 0 || path.size() != m + 1) {
+			if(path.size() == 0) { 
 				katt.append("Impossible\n");
 			} else {
 				for(int i = 0; i < path.size(); ++i) {

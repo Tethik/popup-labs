@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -91,6 +92,7 @@ public class EulerTest {
 	}
 	
 	@Test
+//	@Ignore
 	public void benchmarkBigRandom() {
 		int maxnodes = 10000;
 		int maxedges = 500000;
@@ -117,6 +119,7 @@ public class EulerTest {
 	}
 	
 	@Test
+//	@Ignore
 	public void EveryThingCyclesToTheCenter() {
 		int maxnodes = 10000;
 		int maxedges = 500000;
@@ -135,11 +138,11 @@ public class EulerTest {
 	
 	@Test
 	public void ImakeThePath() {
-		int maxnodes = 10;
-		int maxedges = maxnodes*maxnodes;
+		int maxnodes = 30;
+		int maxedges = maxnodes*maxnodes / 2;
 		Random random = new Random();
 		
-		for(int j = 0; j < 1000000; ++j) {
+		for(int j = 0; j < 1000; ++j) {
 			int nEdges = 1 + random.nextInt(maxedges - 1);
 			
 			ArrayList<Edge> edges = new ArrayList<>();
@@ -152,14 +155,16 @@ public class EulerTest {
 				prev = next;
 			}
 			
+//			System.out.println("#");
 			Collections.shuffle(edges);
 			for(int i = 0; i < nEdges; ++i) {
 				euler.addEdge(edges.get(i).from, edges.get(i).to);
 			}
 			
-			System.out.println(edges);
+//			System.out.println(edges);
 			
 			List<Integer> path = euler.path();
+//			System.out.println(path);
 			prev = path.get(0);
 			for(int i = 1; i < path.size(); ++i) {
 				int next = path.get(i);
