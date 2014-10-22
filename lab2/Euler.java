@@ -1,8 +1,8 @@
+
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 
 
 /**
@@ -81,7 +81,6 @@ public class Euler {
 			StringBuilder builder = new StringBuilder();
 			builder.append("[");
 			Node it = start;
-			int i = 0;
 			while(it != null) {
 				builder.append(it.value);
 				builder.append(" ");
@@ -172,28 +171,25 @@ public class Euler {
 		start = start > -1 ? start : nonzero; 
 				
 		path.add(start);
-		Node iterator = path.iterator();				
+		Node iterator = path.end;				
 		
 		while(iterator != null) {
 			int current = iterator.value;	
-			
-			// Find cycle for current, append to iterator...
-			Node insert = iterator;
-			while(adjacencyLists[current].size() > 0) {
-				int next = current;
-				
+
+			if(adjacencyLists[current].size() > 0) {
+				// Find cycle for current, append to iterator...
+				Node insert = iterator;
+				int next = current;				
 				do {
 					next = adjacencyLists[next].pollFirst();					
 					insert = path.insert(insert, next);
-				} while(next != current && adjacencyLists[next].size() > 0);
+				} while(adjacencyLists[next].size() > 0);
 				
-				if(next != current // found the end
-						&& adjacencyLists[current].size() > 0) // but there are still edges from this node..
-					insert = iterator;
-			}	
-			
-			// All cycles handled, continue.
-			iterator = iterator.next;
+				iterator = insert;
+			} else {				
+				// All cycles handled, continue backwards.
+				iterator = iterator.previous;
+			}
 		}
 		
 		if(path.size <= numberOfEdges) // composites..

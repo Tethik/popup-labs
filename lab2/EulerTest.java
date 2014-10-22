@@ -1,14 +1,12 @@
-import static org.junit.Assert.*;
 
-import java.util.ArrayDeque;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Random;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 
