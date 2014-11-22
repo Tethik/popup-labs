@@ -96,7 +96,16 @@ def format(mod_res, mod_primes):
 			return (True, False)
 			
 	return (False, False)
-			
+	
+def lcm(a,b):
+	return a * b // gcd(a, b)		
+	
+def lcmm(args):
+	"""Return lcm of args."""   
+	l = lcm(args[0], args[1])
+	for i in range(2,len(args)):
+		l = lcm(l, args[i])
+	return l 
 	
 def ext_crt(resi, primes):
 	# x \cong a mod n => x \cong a mod p1, x \cong a mod p2
@@ -106,13 +115,17 @@ def ext_crt(resi, primes):
 	mod_res = resi[:]
 	mod_primes = primes[:]
 	
+	if len(mod_primes) == 1:
+		return (mod_res[0], mod_primes[0])
+	
 	#~ if mod_primes[0] == mod_primes[1]:
 		#~ if mod_res[0] == mod_res[1]:
 			#~ return mod_res[0], mod_primes[0]
 		#~ return None
 	
-	t = gcd(mod_primes[0], mod_primes[1])
-	lcm = abs(mod_primes[0] * mod_primes[1]) // t
+	#~ t = gcd(mod_primes[0], mod_primes[1])
+	
+	_lcm = lcmm(mod_primes) #abs(mod_primes[0] * mod_primes[1]) // t
 	
 	f = format(mod_res, mod_primes)
 	while f[0]:
@@ -139,7 +152,7 @@ def ext_crt(resi, primes):
 			break
 		res += prime
 		
-	return (res, lcm)
+	return (res, _lcm)
 			
 		
 				 
