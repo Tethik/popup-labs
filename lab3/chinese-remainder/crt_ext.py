@@ -45,8 +45,8 @@ def format_system(mod_res, mod_primes):
                 if r1 != r2:
                     return (True, True)
                 else:
-                    del mod_primes[max(i,j)]
-                    del mod_res[max(i,j)]
+                    del mod_primes[max(i, j)]
+                    del mod_res[max(i, j)]
                     return (True, False)
 
             t = gcd(p1, p2)
@@ -89,10 +89,10 @@ def format_system(mod_res, mod_primes):
             p2 = p2 // p3
             r2 = r2 % p2
             r1 = r1 % p1
-            del mod_primes[max(i,j)]
-            del mod_res[max(i,j)]
-            del mod_primes[min(i,j)]
-            del mod_res[min(i,j)]
+            del mod_primes[max(i, j)]
+            del mod_res[max(i, j)]
+            del mod_primes[min(i, j)]
+            del mod_res[min(i, j)]
             mod_primes.append(p1)
             mod_primes.append(p2)
             mod_primes.append(p3)
@@ -104,7 +104,7 @@ def format_system(mod_res, mod_primes):
     return (False, False)
 
 
-def lcm(a,b):
+def lcm(a, b):
     """
     Calculates lowest common multiple of two numbers
     """
@@ -116,7 +116,7 @@ def lcmm(args):
     Calculates lowest common multiple of a list of numbers.
     """
     l = lcm(args[0], args[1])
-    for i in range(2,len(args)):
+    for i in range(2, len(args)):
         l = lcm(l, args[i])
     return l
 
@@ -185,10 +185,10 @@ def crt(mod_res, mod_primes):
     for i in range(len(mod_primes)):
         prime = mod_primes[i]
         a = mod_res[i]
-        rest = N//prime
+        rest = N // prime
         r, s, _ = extended_gcd(prime, rest)
-        e = s*rest
-        sum += a*e
+        e = s * rest
+        sum += a * e
 
     return sum % N, N
 

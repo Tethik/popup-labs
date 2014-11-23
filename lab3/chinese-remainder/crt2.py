@@ -46,5 +46,5 @@ if __name__ == '__main__':
         line = sys.stdin.readline().strip().split()
         mod_res = [int(i) for i in line[::2]]
         mod_primes = [int(i) for i in line[1::2]]
-        ans = chinese_remainder_theorem(mod_res, mod_primes)
-        print "{} {}".format(*ans)
+        ans1, ans2 = chinese_remainder_theorem(mod_res, mod_primes)
+        print "{} {}".format(ans1, ans2)
