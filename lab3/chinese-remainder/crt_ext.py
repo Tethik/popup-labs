@@ -1,17 +1,21 @@
 #!/usr/bin/python
+
+__authors__ = "Joakim Uddholm, Per Classon"
+
 import sys
 import operator
 from fractions import gcd
 import itertools
 
-# From wikipedia: http://en.wikipedia.org/wiki/Extended_Euclidean_algorithm
 def extended_gcd(a, b):
+	"""
+	From wikipedia: http://en.wikipedia.org/wiki/Extended_Euclidean_algorithm
+	"""
 	s, old_s = 0, 1
 	t, old_t = 1, 0
 	r, old_r = b, a    
 	while r != 0:
 		quotient = old_r // r
-		assert(r != 0)
 		old_r, r = r, old_r - (quotient * r)
 		old_s, s = s, old_s - (quotient * s)
 		old_t, t = t, old_t - (quotient * t)       
@@ -19,15 +23,21 @@ def extended_gcd(a, b):
 	return old_s, old_t, old_r
 	
 def format(mod_res, mod_primes):
-	#~ print(mod_primes)
-	#~ print(mod_res)
+	"""
+	Formats a system of congruence equations
+	
+	x = a1 mod p1
+	...
+	x = aN mod pN
+	
+	Into another system of equations where every p1 ... pN are coprime.
+	"""
+
 	for i in range(len(mod_primes)):
-		for j in range(len(mod_primes)):
-			if i == j:
-				continue
-			
+		for j in range(i):						
 			p1 = mod_primes[i]
 			p2 = mod_primes[j]
+				
 			r1 = mod_res[i]
 			r2 = mod_res[j]
 			
@@ -53,8 +63,6 @@ def format(mod_res, mod_primes):
 					del mod_res[j]
 					mod_primes.append(p2)
 					mod_res.append(r2)
-					#~ mod_primes.append(p3)
-					#~ mod_res.append(r3)
 					return (True, False)
 				else:
 					return (True, True)
@@ -66,8 +74,6 @@ def format(mod_res, mod_primes):
 					r1 = r1 % p1
 					del mod_primes[i]
 					del mod_res[i]
-					#~ mod_primes.append(p3)
-					#~ mod_res.append(r3)
 					mod_primes.append(p1)
 					mod_res.append(r1)
 					return (True, False)
@@ -98,16 +104,31 @@ def format(mod_res, mod_primes):
 	return (False, False)
 	
 def lcm(a,b):
+	"""
+	Calculates lowest common multiple of two numbers
+	"""
 	return a * b // gcd(a, b)		
 	
 def lcmm(args):
-	"""Return lcm of args."""   
+	"""
+	Calculates lowest common multiple of a list of numbers.
+	"""   
 	l = lcm(args[0], args[1])
 	for i in range(2,len(args)):
 		l = lcm(l, args[i])
 	return l 
 	
 def ext_crt(resi, primes):
+	"""
+		Solves a system of congruence equations of the form
+		
+		x = a1 mod p1
+		...
+		x = aN mod pN 
+		
+		where pi are not necessarily coprime. (Solves the non-relative coprime)
+	"""
+	
 	# x \cong a mod n => x \cong a mod p1, x \cong a mod p2
 	# p1 * p2 = n
 	# eg. 5 mod 6 = 5 mod 3, 5 mod 2. 1 mod 2, 2 mod 3
@@ -118,14 +139,7 @@ def ext_crt(resi, primes):
 	if len(mod_primes) == 1:
 		return (mod_res[0], mod_primes[0])
 	
-	#~ if mod_primes[0] == mod_primes[1]:
-		#~ if mod_res[0] == mod_res[1]:
-			#~ return mod_res[0], mod_primes[0]
-		#~ return None
-	
-	#~ t = gcd(mod_primes[0], mod_primes[1])
-	
-	_lcm = lcmm(mod_primes) #abs(mod_primes[0] * mod_primes[1]) // t
+	_lcm = lcmm(mod_primes) 
 	
 	f = format(mod_res, mod_primes)
 	while f[0]:
@@ -133,32 +147,32 @@ def ext_crt(resi, primes):
 			return None
 		f = format(mod_res, mod_primes)
 		
-	#~ print(mod_primes)
-	#~ print(mod_res)
-	m = 1
-	for p in primes:
-		m *= p
-	#~ print(m)
 	res, prime = crt(mod_res, mod_primes)
-	#~ print(res, prime, m)
 	
-	while res <= m:
+	adds = 0
+	while res <= _lcm:
 		derp = True
-		#~ print(res)
+		
 		for i in range(len(primes)):			
 			derp = derp and res % primes[i] == resi[i]
 				
 		if derp:		
 			break
 		res += prime
-		
+		adds += 1
+			
 	return (res, _lcm)
 			
-		
-				 
-			
-	
 def crt(mod_res, mod_primes):
+	"""
+		Solves a system of congruence equations of the form
+		
+		x = a1 mod p1
+		...
+		x = aN mod pN 
+		
+		where all pi are coprime with each other.
+	"""
 	# calculate N as product of primes
 	N = 1
 	for p in mod_primes:
@@ -172,7 +186,6 @@ def crt(mod_res, mod_primes):
 		rest = N//prime
 		r, s, _ = extended_gcd(prime, rest)
 		e = s*rest
-		#~ print(s,rest,e)
 		sum += a*e
 	
 	return sum % N, N
@@ -189,11 +202,3 @@ if __name__ == '__main__':
 			print (str(ans[0]) + " " + str(ans[1]))
 		else:
 			print ("no solution")
-		
-
-					
-			
-	
-		
-	
-	
