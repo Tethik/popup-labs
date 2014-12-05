@@ -35,6 +35,20 @@ public class StringMatcherTest {
 	}
 
 	@Test
+	public void simpleTestTable() {
+		StringMatcher matcher = new StringMatcher(new HashMap<String, int[]>());
+		int[] table = matcher.computePrefixTable("aba".toCharArray());
+		Assert.assertArrayEquals(new int[] { -1, 0, 0, 1 }, table);
+
+		List<Integer> posi = matcher.findPositions("aba".toCharArray(), "aababa".toCharArray());
+
+		for (Integer p : posi) {
+			System.out.println(p);
+		}
+
+	}
+
+	@Test
 	public void kattisTest() {
 		StringMatcher matcher = new StringMatcher(new HashMap<String, int[]>());
 		Assert.assertEquals(new ArrayList<Integer>(Arrays.asList(2, 4)), matcher.find("p", "Popup"));

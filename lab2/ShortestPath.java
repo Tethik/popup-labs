@@ -66,36 +66,42 @@ public class ShortestPath {
 	public static Path dijkstra(AdjacencyListGraph<EdgeWithWeight> g, int source) {
 		int length = g.getV();
 		
-		final long[] weight = new long[length];		
-		PriorityQueue<Integer> q = new PriorityQueue<Integer>(length, new DistanceComparator(weight));
+		PriorityQueue<Vertex> q = new PriorityQueue<Vertex>();
 		
 		int[] prev = new int[length];
-		HashSet<Integer> visited = new HashSet<>();
+		boolean[] visited = new boolean[length];
+		long[] weight = new long[length];
 		
 		for(int i = 0; i < length; ++i) {
-			weight[i] = Long.MAX_VALUE;
 			prev[i] = -1;
+			weight[i] = Long.MAX_VALUE;
 		}
-		weight[source] = 0;
+		
 		prev[source] = source;
-		q.add(source);
+		weight[source] = 0;
+		q.add(new Vertex(source, 0));
 		
 		// get all vertex: from graph		
 		while (!q.isEmpty()) {
-			Integer node = q.poll();
-				
-			visited.add(node);
-			for (EdgeWithWeight e : g.getEdgesFrom(node)) {
-				if (visited.contains(e.to))
-					continue;	
-				
-				long alt = e.getWeight(weight[node]);
+			Vertex v = q.poll();
+			int node = v.index;
 
-				if (alt >= 0 && alt < weight[e.to]) {
+			if (visited[node])
+				continue;
+			
+			visited[node] = true;
+			
+			for (EdgeWithWeight e : g.getEdgesFrom(node)) {
+				if (visited[e.to])
+					continue;
+				
+				int alt = v.weight + e.weight;
+				
+				if (alt < weight[e.to]) {
 					weight[e.to] = alt;
+					Vertex to = new Vertex(e.to, alt);
+					q.add(to);
 					prev[e.to] = node;
-					q.remove(e.to);
-					q.add(e.to);
 				}
 				
 			}

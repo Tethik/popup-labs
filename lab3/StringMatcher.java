@@ -67,9 +67,6 @@ public class StringMatcher {
 			j++;
 
 			if (j == pattern.length) {
-				if (i == -1) {
-					break;
-				}
 				positions.add(i - pattern.length);
 				j = table[j];
 			}
